@@ -1,16 +1,58 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { app, db } from "./firebaseConfig";
+import { Header } from "./components/Header";
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { app } from "./firebaseConfig";
+
+const MainWrap = styled.div`
+  height: 100vh;
+`;
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [user, setUser] = useState({
+    set: false,
+    name: "",
+    pic: "",
+    uid: "",
+  });
+
+  const signIn = async () => {
+    var provider = new GoogleAuthProvider();
+    const usr = await signInWithPopup(getAuth(app), provider);
+    setUser({
+      set: true,
+      name: usr.user.displayName,
+      pic: usr.user.photoURL,
+      uid: usr.user.uid,
+    });
+  };
+
+  const signOutFoo = async () => {
+    await signOut(getAuth());
+    setUser({
+      set: false,
+      name: "",
+      pic: "",
+      uid: "",
+    });
+  };
 
   useEffect(() => {
-    console.log(app);
-    console.log(db);
-  }, []);
+    console.log(user);
+    console.log(getAuth().currentUser);
+  }, [user]);
 
-  return <></>;
+  return (
+    <MainWrap>
+      <Header user={user} signin={signIn} signout={signOutFoo} />
+    </MainWrap>
+  );
 }
 
 export default App;

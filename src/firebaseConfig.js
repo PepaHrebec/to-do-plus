@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.API_LOCAL,
+  apiKey: import.meta.env.VITE_API_LOCAL,
   authDomain: "to-do-plus-89c79.firebaseapp.com",
   projectId: "to-do-plus-89c79",
   storageBucket: "to-do-plus-89c79.appspot.com",
