@@ -56,7 +56,7 @@ function App() {
   return (
     <MainWrap>
       <Header user={user} signin={signIn} signout={signOutFoo} />
-      <FormComp />
+      <FormComp user={user} />
     </MainWrap>
   );
 }

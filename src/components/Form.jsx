@@ -1,7 +1,9 @@
+import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import styled from "styled-components";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-function FormComp() {
+function FormComp({ user }) {
   const [taskName, setTaskName] = useState("");
   const [taskDate, setTaskDate] = useState("");
   const [taskValue, setTaskValue] = useState("");
@@ -9,6 +11,19 @@ function FormComp() {
   const submitForm = (e) => {
     e.preventDefault();
     console.log({ taskName, taskDate, taskValue });
+    if (!!getAuth.currentUser) {
+      submitDoc();
+    }
+  };
+
+  const submitDoc = async () => {
+    try {
+      await addDoc(collection(getFirestore(), `${user.uid}`), {
+        name: "Hrebec",
+      });
+    } catch (error) {
+      console.error("Error writing new message to Firebase Database", error);
+    }
   };
 
   return (
