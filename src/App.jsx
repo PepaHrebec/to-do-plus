@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { Header } from "./components/Header";
 import { FormComp } from "./components/Form";
 import {
-  getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  getAuth,
 } from "firebase/auth";
-import { app } from "./firebaseConfig";
+import { app, auth } from "./firebaseConfig";
 
 const MainWrap = styled.div`
   height: 100vh;
@@ -17,7 +17,7 @@ const MainWrap = styled.div`
 
 function App() {
   const [user, setUser] = useState({
-    set: false,
+    set: !!getAuth().currentUser,
     name: "",
     pic: "",
     uid: "",
@@ -26,7 +26,8 @@ function App() {
   const signIn = async () => {
     try {
       var provider = new GoogleAuthProvider();
-      const usr = await signInWithPopup(getAuth(app), provider);
+      provider.setCustomParameters({ prompt: "select_account" });
+      const usr = await signInWithPopup(auth, provider);
       setUser({
         set: true,
         name: usr.user.displayName,
@@ -39,19 +40,18 @@ function App() {
   };
 
   const signOutFoo = async () => {
-    await signOut(getAuth());
+    await signOut(auth);
     setUser({
-      set: false,
+      set: !!getAuth().currentUser,
       name: "",
       pic: "",
       uid: "",
     });
   };
 
-  // useEffect(() => {
-  //   console.log(user);
-  //   console.log(getAuth().currentUser);
-  // }, [user]);
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <MainWrap>
