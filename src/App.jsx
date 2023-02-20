@@ -23,6 +23,7 @@ function App() {
     pic: "",
     uid: "",
   });
+  const [todos, setTodos] = useState([]);
 
   const signIn = async () => {
     try {
@@ -44,10 +45,12 @@ function App() {
   const watchDatabase = (path) => {
     const colQuery = query(collection(db, `${path}`));
     const unsub = onSnapshot(colQuery, (document) => {
-      // console.log(document);
+      const dataArr = [];
       document.forEach((doc) => {
         console.log(doc.data());
+        dataArr.push(doc.data());
       });
+      setTodos([...dataArr]);
     });
   };
 
@@ -63,7 +66,8 @@ function App() {
 
   useEffect(() => {
     console.log(user);
-  }, [user]);
+    console.log(todos);
+  }, [user, todos]);
 
   return (
     <MainWrap>
