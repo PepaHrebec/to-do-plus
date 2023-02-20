@@ -8,18 +8,26 @@ function FormComp({ user }) {
   const [taskDate, setTaskDate] = useState("");
   const [taskValue, setTaskValue] = useState("");
 
+  const checkEmpty = () => {
+    return taskName !== "" && taskDate !== "" && taskValue !== "";
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     console.log({ taskName, taskDate, taskValue });
-    if (!!getAuth.currentUser) {
+    if (!!getAuth().currentUser && checkEmpty) {
       submitDoc();
+    } else {
+      console.log("Can't submit");
     }
   };
 
   const submitDoc = async () => {
     try {
       await addDoc(collection(getFirestore(), `${user.uid}`), {
-        name: "Hrebec",
+        name: taskName,
+        date: taskDate,
+        value: taskValue,
       });
     } catch (error) {
       console.error("Error writing new message to Firebase Database", error);
@@ -27,38 +35,39 @@ function FormComp({ user }) {
   };
 
   return (
-    <>
-      <form action="">
-        <label htmlFor="nameInp">Task:</label>
-        <input
-          type="text"
-          id="nameInp"
-          name="nameInp"
-          onChange={(e) => {
-            setTaskName(e.target.value);
-          }}
-        />
-        <label htmlFor="dateInp">When:</label>
-        <input
-          type="date"
-          id="dateInp"
-          name="dateInp"
-          onChange={(e) => {
-            setTaskDate(e.target.value);
-          }}
-        />
-        <label htmlFor="valueInp">What:</label>
-        <input
-          type="text"
-          id="valueInp"
-          name="valueInp"
-          onChange={(e) => {
-            setTaskValue(e.target.value);
-          }}
-        />
-        <button onClick={submitForm}>Submit</button>
-      </form>
-    </>
+    <form action="">
+      <label htmlFor="nameInp">Task:</label>
+      <input
+        type="text"
+        id="nameInp"
+        name="nameInp"
+        onChange={(e) => {
+          setTaskName(e.target.value);
+        }}
+        required
+      />
+      <label htmlFor="dateInp">When:</label>
+      <input
+        type="date"
+        id="dateInp"
+        name="dateInp"
+        onChange={(e) => {
+          setTaskDate(e.target.value);
+        }}
+        required
+      />
+      <label htmlFor="valueInp">What:</label>
+      <input
+        type="text"
+        id="valueInp"
+        name="valueInp"
+        onChange={(e) => {
+          setTaskValue(e.target.value);
+        }}
+        required
+      />
+      <button onClick={submitForm}>Submit</button>
+    </form>
   );
 }
 

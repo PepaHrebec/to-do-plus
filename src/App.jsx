@@ -9,7 +9,8 @@ import {
   signOut,
   getAuth,
 } from "firebase/auth";
-import { app, auth } from "./firebaseConfig";
+import { app, auth, db } from "./firebaseConfig";
+import { collection, onSnapshot, query } from "firebase/firestore";
 
 const MainWrap = styled.div`
   height: 100vh;
@@ -34,9 +35,20 @@ function App() {
         pic: usr.user.photoURL,
         uid: usr.user.uid,
       });
+      watchDatabase(usr.user.uid);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const watchDatabase = (path) => {
+    const colQuery = query(collection(db, `${path}`));
+    const unsub = onSnapshot(colQuery, (document) => {
+      // console.log(document);
+      document.forEach((doc) => {
+        console.log(doc.data());
+      });
+    });
   };
 
   const signOutFoo = async () => {
