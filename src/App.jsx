@@ -9,8 +9,9 @@ import {
   signOut,
   getAuth,
 } from "firebase/auth";
-import { app, auth, db } from "./firebaseConfig";
+import { auth, db } from "./firebaseConfig";
 import { collection, onSnapshot, query } from "firebase/firestore";
+import { Display } from "./components/Display";
 
 const MainWrap = styled.div`
   height: 100vh;
@@ -47,8 +48,10 @@ function App() {
     const unsub = onSnapshot(colQuery, (document) => {
       const dataArr = [];
       document.forEach((doc) => {
-        console.log(doc.data());
-        dataArr.push(doc.data());
+        dataArr.push({ ...doc.data(), id: doc.id });
+      });
+      dataArr.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
       });
       setTodos([...dataArr]);
     });
@@ -62,17 +65,16 @@ function App() {
       pic: "",
       uid: "",
     });
+    setTodos([]);
   };
 
-  useEffect(() => {
-    console.log(user);
-    console.log(todos);
-  }, [user, todos]);
+  // useEffect(() => {}, [user, todos]);
 
   return (
     <MainWrap>
       <Header user={user} signin={signIn} signout={signOutFoo} />
       <FormComp user={user} />
+      <Display todoArr={todos} />
     </MainWrap>
   );
 }

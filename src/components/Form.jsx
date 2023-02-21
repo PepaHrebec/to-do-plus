@@ -14,7 +14,7 @@ function FormComp({ user }) {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log({ taskName, taskDate, taskValue });
+    // console.log({ taskName, taskDate, taskValue });
     if (!!getAuth().currentUser && checkEmpty) {
       submitDoc();
     } else {
