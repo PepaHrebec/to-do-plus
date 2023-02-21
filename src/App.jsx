@@ -10,7 +10,13 @@ import {
   getAuth,
 } from "firebase/auth";
 import { auth, db } from "./firebaseConfig";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import { Display } from "./components/Display";
 
 const MainWrap = styled.div`
@@ -68,13 +74,21 @@ function App() {
     setTodos([]);
   };
 
+  const deleteTodo = async (id) => {
+    try {
+      await deleteDoc(doc(db, `${user.uid}`, id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // useEffect(() => {}, [user, todos]);
 
   return (
     <MainWrap>
       <Header user={user} signin={signIn} signout={signOutFoo} />
       <FormComp user={user} />
-      <Display todoArr={todos} />
+      <Display todoArr={todos} deleteTodo={deleteTodo} />
     </MainWrap>
   );
 }

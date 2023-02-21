@@ -44,7 +44,6 @@ function FormComp({ user }) {
         onChange={(e) => {
           setTaskName(e.target.value);
         }}
-        required
       />
       <label htmlFor="dateInp">When:</label>
       <input
@@ -54,7 +53,6 @@ function FormComp({ user }) {
         onChange={(e) => {
           setTaskDate(e.target.value);
         }}
-        required
       />
       <label htmlFor="valueInp">What:</label>
       <input
@@ -64,7 +62,6 @@ function FormComp({ user }) {
         onChange={(e) => {
           setTaskValue(e.target.value);
         }}
-        required
       />
       <button onClick={submitForm}>Submit</button>
     </form>
