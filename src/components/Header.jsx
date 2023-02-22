@@ -9,7 +9,8 @@ const Hdr = styled.div`
   padding: 1em;
 `;
 
-const Name = styled.h1`
+const Name = styled.div`
+  font-family: "Gloock", serif;
   font-size: large;
 `;
 

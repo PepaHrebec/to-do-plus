@@ -6,16 +6,15 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 function FormComp({ user }) {
   const [taskName, setTaskName] = useState("");
   const [taskDate, setTaskDate] = useState("");
-  const [taskValue, setTaskValue] = useState("");
 
   const checkEmpty = () => {
-    return taskName !== "" && taskDate !== "" && taskValue !== "";
+    return taskName !== "" && taskDate !== "";
   };
 
   const submitForm = (e) => {
     e.preventDefault();
     // console.log({ taskName, taskDate, taskValue });
-    if (!!getAuth().currentUser && checkEmpty) {
+    if (!!getAuth().currentUser && checkEmpty()) {
       submitDoc();
     } else {
       console.log("Can't submit");
@@ -27,7 +26,6 @@ function FormComp({ user }) {
       await addDoc(collection(getFirestore(), `${user.uid}`), {
         name: taskName,
         date: taskDate,
-        value: taskValue,
       });
     } catch (error) {
       console.error("Error writing new message to Firebase Database", error);
@@ -52,15 +50,6 @@ function FormComp({ user }) {
         name="dateInp"
         onChange={(e) => {
           setTaskDate(e.target.value);
-        }}
-      />
-      <label htmlFor="valueInp">What:</label>
-      <input
-        type="text"
-        id="valueInp"
-        name="valueInp"
-        onChange={(e) => {
-          setTaskValue(e.target.value);
         }}
       />
       <button onClick={submitForm}>Submit</button>

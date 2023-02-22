@@ -1,9 +1,18 @@
+import styled from "styled-components";
+
+const StyledCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+
 function Card({ title, date, value, id, deleteTodo }) {
   return (
-    <>
-      <h1>{title}</h1>
-      <p>{date}</p>
-      <p>{value}</p>
+    <StyledCard>
+      <div>{title}</div>
+      <div>{date}</div>
+      <div>{value}</div>
       <button
         onClick={() => {
           deleteTodo(id);
@@ -11,8 +20,7 @@ function Card({ title, date, value, id, deleteTodo }) {
       >
         Delete
       </button>
-      <button>Edit</button>
-    </>
+    </StyledCard>
   );
 }
 

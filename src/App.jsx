@@ -87,7 +87,7 @@ function App() {
   return (
     <MainWrap>
       <Header user={user} signin={signIn} signout={signOutFoo} />
-      <FormComp user={user} />
+      {user.set && <FormComp user={user} />}
       <Display todoArr={todos} deleteTodo={deleteTodo} />
     </MainWrap>
   );
