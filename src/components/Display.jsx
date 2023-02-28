@@ -1,8 +1,15 @@
+import styled from "styled-components";
 import { Card } from "./Card";
+
+const StyledDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function Display({ todoArr, deleteTodo }) {
   return (
-    <>
+    <StyledDisplay>
       {todoArr.map((todo) => {
         return (
           <Card
@@ -10,12 +17,11 @@ function Display({ todoArr, deleteTodo }) {
             id={todo.id}
             title={todo.name}
             date={todo.date}
-            value={todo.value}
             deleteTodo={deleteTodo}
           />
         );
       })}
-    </>
+    </StyledDisplay>
   );
 }
 

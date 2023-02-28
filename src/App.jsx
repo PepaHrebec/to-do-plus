@@ -20,7 +20,7 @@ import {
 import { Display } from "./components/Display";
 
 const MainWrap = styled.div`
-  height: 100vh;
+  height: 100svh;
 `;
 
 function App() {

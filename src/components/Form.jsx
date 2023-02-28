@@ -3,6 +3,13 @@ import { useState } from "react";
 import styled from "styled-components";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: 15px auto;
+`;
+
 function FormComp({ user }) {
   const [taskName, setTaskName] = useState("");
   const [taskDate, setTaskDate] = useState("");
@@ -33,7 +40,7 @@ function FormComp({ user }) {
   };
 
   return (
-    <form action="">
+    <StyledForm action="">
       <label htmlFor="nameInp">Task:</label>
       <input
         type="text"
@@ -53,7 +60,7 @@ function FormComp({ user }) {
         }}
       />
       <button onClick={submitForm}>Submit</button>
-    </form>
+    </StyledForm>
   );
 }
 
