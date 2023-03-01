@@ -18,10 +18,14 @@ function FormComp({ user }) {
     return taskName !== "" && taskDate !== "";
   };
 
+  const checkLate = () => {
+    return new Date(taskDate).getTime() >= new Date().getTime();
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     // console.log({ taskName, taskDate, taskValue });
-    if (!!getAuth().currentUser && checkEmpty()) {
+    if (!!getAuth().currentUser && checkEmpty() && checkLate()) {
       submitDoc();
     } else {
       console.log("Can't submit");

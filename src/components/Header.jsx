@@ -14,6 +14,11 @@ const Name = styled.div`
   font-size: large;
 `;
 
+const StyledImg = styled.img`
+  border-radius: 10px;
+  width: 3rem;
+`;
+
 function Header({ user, signin, signout }) {
   return (
     <Hdr>
@@ -21,6 +26,7 @@ function Header({ user, signin, signout }) {
       {user.set ? (
         <>
           <div>{user.name}</div>
+          <StyledImg src={user.pic} alt="User image" />
           <button onClick={signout}>Sign-out</button>
         </>
       ) : (
