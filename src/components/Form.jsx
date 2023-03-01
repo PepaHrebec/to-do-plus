@@ -27,13 +27,12 @@ const StyledInput = styled.input`
 `;
 
 const SbmtButton = styled.button`
-  padding: 5px;
   width: 8rem;
-  border-radius: 4px;
   margin: 0 auto;
   margin-top: 10px;
-  background-color: #faaca8;
-  background-image: linear-gradient(19deg, #faaca8 0%, #ddd6f3 100%);
+  background-color: #f7ede2;
+  border-radius: 8px;
+  padding: 4px;
 `;
 
 function FormComp({ user }) {

@@ -7,17 +7,24 @@ const Hdr = styled.div`
   justify-content: space-around;
   border-bottom: solid gray 2px;
   padding: 1em;
-  background-color: white;
+  background-color: #f7b801;
+  height: 4rem;
 `;
 
 const Name = styled.div`
   font-family: "Gloock", serif;
-  font-size: large;
+  font-size: xx-large;
 `;
 
 const StyledImg = styled.img`
   border-radius: 10px;
   width: 3rem;
+`;
+
+const StyledButton = styled.button`
+  background-color: #f7ede2;
+  border-radius: 8px;
+  padding: 4px;
 `;
 
 function Header({ user, signin, signout }) {
@@ -28,10 +35,10 @@ function Header({ user, signin, signout }) {
         <>
           <div>{user.name}</div>
           <StyledImg src={user.pic} alt="User image" />
-          <button onClick={signout}>Sign-out</button>
+          <StyledButton onClick={signout}>Sign-out</StyledButton>
         </>
       ) : (
-        <button onClick={signin}>Sign-in</button>
+        <StyledButton onClick={signin}>Sign-in</StyledButton>
       )}
     </Hdr>
   );
