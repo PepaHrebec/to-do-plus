@@ -5,6 +5,7 @@ const StyledDisplay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20px;
 `;
 
 function Display({ todoArr, deleteTodo }) {

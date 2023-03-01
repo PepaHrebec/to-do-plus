@@ -7,6 +7,7 @@ const Hdr = styled.div`
   justify-content: space-around;
   border-bottom: solid gray 2px;
   padding: 1em;
+  background-color: white;
 `;
 
 const Name = styled.div`

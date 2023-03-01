@@ -8,6 +8,32 @@ const StyledForm = styled.form`
   flex-direction: column;
   max-width: 350px;
   margin: 15px auto;
+  background-color: white;
+  padding: 20px;
+  border: solid black 2px;
+  border-radius: 20px;
+`;
+
+const FormWrap = styled.div`
+  padding: 5px;
+  display: flex;
+  gap: 10px;
+`;
+
+const StyledInput = styled.input`
+  width: 70%;
+  padding: 4px;
+  border-radius: 8px;
+`;
+
+const SbmtButton = styled.button`
+  padding: 5px;
+  width: 8rem;
+  border-radius: 4px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: #faaca8;
+  background-image: linear-gradient(19deg, #faaca8 0%, #ddd6f3 100%);
 `;
 
 function FormComp({ user }) {
@@ -45,25 +71,29 @@ function FormComp({ user }) {
 
   return (
     <StyledForm action="">
-      <label htmlFor="nameInp">Task:</label>
-      <input
-        type="text"
-        id="nameInp"
-        name="nameInp"
-        onChange={(e) => {
-          setTaskName(e.target.value);
-        }}
-      />
-      <label htmlFor="dateInp">When:</label>
-      <input
-        type="date"
-        id="dateInp"
-        name="dateInp"
-        onChange={(e) => {
-          setTaskDate(e.target.value);
-        }}
-      />
-      <button onClick={submitForm}>Submit</button>
+      <FormWrap>
+        <label htmlFor="nameInp">Task:</label>
+        <StyledInput
+          type="text"
+          id="nameInp"
+          name="nameInp"
+          onChange={(e) => {
+            setTaskName(e.target.value);
+          }}
+        />
+      </FormWrap>
+      <FormWrap>
+        <label htmlFor="dateInp">When:</label>
+        <StyledInput
+          type="date"
+          id="dateInp"
+          name="dateInp"
+          onChange={(e) => {
+            setTaskDate(e.target.value);
+          }}
+        />
+      </FormWrap>
+      <SbmtButton onClick={submitForm}>Submit</SbmtButton>
     </StyledForm>
   );
 }

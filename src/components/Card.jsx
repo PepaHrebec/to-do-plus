@@ -7,6 +7,10 @@ const StyledCard = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  border: solid 2px black;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: white;
 `;
 
 const StyledTitle = styled.div`
